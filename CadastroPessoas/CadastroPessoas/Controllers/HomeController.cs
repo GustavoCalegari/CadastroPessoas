@@ -12,20 +12,24 @@ using Microsoft.EntityFrameworkCore;
 namespace CadastroPessoas.Controllers
 {
     [ApiController]
+    [Route("[controller]")]
     public class HomeController : Controller
     {
+        [Route("")]
         public IActionResult Index()
         {
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [Route("erro")]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         [HttpGet]
+        [Route("get")]
         public async Task<ActionResult<List<Pessoa>>> Get([FromServices] DataContext context)
         {
             var pessoas = await context.Pessoas.ToListAsync();
@@ -33,7 +37,7 @@ namespace CadastroPessoas.Controllers
         }
 
         [HttpGet]
-        [Route("{id: int}")]
+        [Route("get/{id:int}")]
         public async Task<ActionResult<Pessoa>> GetById([FromServices] DataContext context, int id)
         {
             var pessoa = await context.Pessoas.Include(x => x.Id)
@@ -43,7 +47,7 @@ namespace CadastroPessoas.Controllers
         }
 
         [HttpPost]
-        [Route("")]
+        [Route("inserir")]
         public async Task<ActionResult<Pessoa>> Post(
             [FromServices] DataContext context,
             [FromBody] Pessoa model)

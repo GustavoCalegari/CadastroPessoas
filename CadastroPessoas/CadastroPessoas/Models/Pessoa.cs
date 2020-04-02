@@ -67,13 +67,13 @@ namespace CadastroPessoas.Models
         /// CPF
         /// </summary>
         [Required]
-        [MinLength(14, ErrorMessage = "O CPF deve conter 14 caracteres")]
+        [MinLength(11, ErrorMessage = "O CPF deve conter 14 caracteres")]
         public string CPF { get; set; }
 
         /// <summary>
         /// Telefone
         /// <//summary>
-        [MinLength(9, ErrorMessage = "O telefone deve conter pelo menos 9 caracteres")]
+        [MinLength(14, ErrorMessage = "O telefone deve conter pelo menos 9 caracteres")]
         public string Telefone { get; set; }
     }
 }
